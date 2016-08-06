@@ -2,13 +2,11 @@ package models
 
 /*
 {
-  "result": {
-    "XETH": {
+   "XETH": {
     "aclass": "currency",
     "altname": "ETH",
     "decimals": 10,
     "display_decimals": 5
-  }
   }
 }
 */

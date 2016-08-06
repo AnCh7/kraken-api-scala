@@ -2,7 +2,6 @@ package models
 
 /*
 {
-  "result": {
     "XDAOXETH": {
     "altname": "DAOETH",
     "aclass_base": "currency",
@@ -36,7 +35,6 @@ package models
     "fee_volume_currency": "ZUSD",
     "margin_call": 80,
     "margin_stop": 40
-  }
   }
 }
  */

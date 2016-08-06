@@ -21,3 +21,13 @@ JSON libraries: http://manuel.bernhardt.io/2015/11/06/a-quick-tour-of-json-libra
 
 Для сборки проекта использовать SBT.
   Для тестирования: scalatest / specs2, scalacheck.
+
+
+
+
+
+  //TODO: Check all inputs with defaults
+  // `buy/sell`: String,
+  // `market/limit`: String,
+
+  // MarketData types

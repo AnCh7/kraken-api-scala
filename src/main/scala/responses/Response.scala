@@ -2,7 +2,8 @@ package responses
 
 /*
 {
-  "error":["EGeneral:Unknown method"]
+  "error":["EGeneral:Unknown method"],
+  "result":{}
 }
 */
 /**

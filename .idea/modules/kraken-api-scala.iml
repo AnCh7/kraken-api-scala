@@ -24,6 +24,11 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.fasterxml.jackson.module:jackson-module-scala_2.11:2.7.5:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.fasterxml.jackson.module:jackson-module-paranamer:2.7.5:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-databind:2.7.5:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-core:2.7.5:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-annotations:2.7.5:jar" level="project" />
     <orderEntry type="library" name="SBT: org.scalaz:scalaz-core_2.11:7.2.4:jar" level="project" />
     <orderEntry type="library" name="SBT: org.tpolecat:doobie-contrib-specs2_2.11:0.3.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.tpolecat:doobie-contrib-postgresql_2.11:0.3.0:jar" level="project" />
@@ -58,5 +63,6 @@
     <orderEntry type="library" name="SBT: org.scodec:scodec-bits_2.11:1.0.12:jar" level="project" />
     <orderEntry type="library" name="SBT: org.tpolecat:doobie-core_2.11:0.3.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.typelevel:macro-compat_2.11:1.1.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.squareup.retrofit2:converter-jackson:2.1.0:jar" level="project" />
   </component>
 </module>

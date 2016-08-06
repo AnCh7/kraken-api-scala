@@ -14,6 +14,8 @@ libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.2.4"
 
 libraryDependencies += "com.squareup.retrofit2" % "retrofit" % "2.1.0"
 libraryDependencies += "com.squareup.retrofit2" % "converter-gson" % "2.1.0"
+libraryDependencies += "com.squareup.retrofit2" % "converter-jackson" % "2.1.0"
+libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.11" % "2.7.5"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "2.2.6"
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.6" % "test"
