@@ -1,80 +1,109 @@
 package dataaccess
 
-import scalaz._, Scalaz._
-import scalaz.effect.{SafeApp, IO}
-import scalaz.stream.Process
 import doobie.imports._
+import models.Asset
 
-case class Coffee(name: String, supId: Int, price: Double, sales: Int, total: Int)
+import scalaz._
+import Scalaz._
+import scalaz.concurrent.Task
+import scalaz.stream.Process
 
-case class Country(code: String, name: String, population: Long)
+object KrakenDao {
 
-case class City(id: Int, name: String, countrycode: String, district: String, population: Int)
-
-class KrakenDao {
-
-  val coffees = List(
-    Coffee("Colombian", 101, 7.99, 0, 0),
-    Coffee("French_Roast", 49, 8.99, 0, 0),
-    Coffee("Espresso", 150, 9.99, 0, 0),
-    Coffee("Colombian_Decaf", 101, 8.99, 0, 0),
-    Coffee("French_Roast_Decaf", 49, 9.99, 0, 0)
+  val xa = DriverManagerTransactor[Task](
+    "org.postgresql.Driver", "jdbc:postgresql:kraken", "postgres", "postgres"
   )
 
-  def insertCity(cs: List[City]): ConnectionIO[Int] =
-    Queries.insertCity.updateMany(cs)
+  import xa.yolo._
 
-  //  def coffeesLessThan(price: Double): Process[ConnectionIO, (String, String)] =
-  //    Queries.coffeesLessThan(price).process
+  def create(): Unit = KrakenQueries.create.quick.unsafePerformSync
 
-//  def insertCoffees(cs: List[Coffee]): ConnectionIO[Int] =
-//    Queries.insertCoffee.updateMany(cs)
-//
-//  def allCoffees: Process[ConnectionIO, Coffee] =
-//    Queries.allCoffees.process
+  def drop(): Unit = KrakenQueries.drop.quick.unsafePerformSync
 
-  //  def create: ConnectionIO[Unit] =
-  //    Queries.create.run.void
+  def insertAsset(asset: Asset): Unit = {
+    KrakenQueries.insertAsset(asset.aclass, asset.altname, asset.decimals, asset.display_decimals).quick.run
+  }
 
+  def insertAsset2(asset: Asset): Unit = {
+    KrakenQueries.insertAsset2(asset.aclass, asset.altname, asset.decimals, asset.display_decimals).quick.run
+  }
+
+  def updateAsset(asset: Asset): Unit = {
+    KrakenQueries.updateAsset(asset.aclass, asset.altname, asset.decimals, asset.display_decimals).quick.run
+  }
+
+  def updateAsset2(asset: Asset): Unit = {
+    KrakenQueries.updateAsset2(asset.aclass, asset.altname, asset.decimals, asset.display_decimals).quick.run
+  }
+
+  def insertAssets(asset: List[Asset]): Unit = {
+    KrakenQueries.insertAssets(asset).quick.run
+  }
+
+  def insertAssets2(asset: List[Asset]): Unit = {
+    KrakenQueries.insertAssets2(asset).quick.run
+  }
+
+  def findAssetByClass(aclass: String): Option[Asset] = {
+    val a = KrakenQueries.findAssetByClass(aclass).process
+    val r = a.map(asset => Asset(asset._1, asset._2, asset._3, asset._4))
+    None
+  }
 }
 
-object Queries {
+object KrakenQueries {
 
-  //  def coffeesLessThan(price: Double): Query0[(String, String)] =
-  //    sql"""
-  //        SELECT cof_name, sup_name
-  //        FROM coffees JOIN suppliers ON coffees.sup_id = suppliers.sup_id
-  //        WHERE price < $price
-  //      """.query[(String, String)]
+  def create: Update0 =
+    sql"""CREATE TABLE asset (
+          asset_id           SERIAL    NOT NULL PRIMARY KEY,
+          aclass             VARCHAR   NOT NULL,
+          altname            VARCHAR   NOT NULL,
+          decimals           INTEGER     NOT NULL,
+          display_decimals   INTEGER     NOT NULL);
+        """.update
 
-  val insertCity: Update[City] =
-    Update[City]("INSERT INTO city VALUES (?, ?, ?, ?, ?)", None)
+  def drop: Update0 = sql"""DROP TABLE IF EXISTS asset""".update
 
-//  def insertCity(name: String, countrycode: String, district: String, population: Int): Update0 =
-//    sql"INSERT INTO city (id, name, countrycode, district, population) VALUES (1101010, $NAME, $countrycode, $district, $population)".update
+  def insertAsset(aclass: String, altname: String, decimals: Int, display_decimals: Int): Update0 = {
+    sql"""INSERT INTO asset (aclass, altname, decimals, display_decimals)
+          VALUES ($aclass, $altname, $decimals, $display_decimals)""".update
+  }
 
-  //  def allCoffees[A]: Query0[Coffee] =
-  //    sql"SELECT cof_name, sup_id, price, sales, total FROM coffees".query[Coffee]
+  def insertAsset2(aclass: String, altname: String, decimals: Int, display_decimals: Int): ConnectionIO[Asset] = {
+    sql"""INSERT INTO asset (aclass, altname, decimals, display_decimals)
+          VALUES ($aclass, $altname, $decimals, $display_decimals)""".update.withUniqueGeneratedKeys("id")
+  }
 
-  //  def create: Update0 =
-  //    sql"""
-  //        CREATE TABLE suppliers (
-  //          sup_id   INT     NOT NULL PRIMARY KEY,
-  //          sup_name VARCHAR NOT NULL,
-  //          street   VARCHAR NOT NULL,
-  //          city     VARCHAR NOT NULL,
-  //          state    VARCHAR NOT NULL,
-  //          zip      VARCHAR NOT NULL
-  //        );
-  //        CREATE TABLE coffees (
-  //          cof_name VARCHAR NOT NULL,
-  //          sup_id   INT     NOT NULL,
-  //          price    DOUBLE  NOT NULL,
-  //          sales    INT     NOT NULL,
-  //          total    INT     NOT NULL
-  //        );
-  //        ALTER TABLE coffees
-  //        ADD CONSTRAINT coffees_suppliers_fk FOREIGN KEY (sup_id) REFERENCES suppliers(sup_id);
-  //      """.update
+  def updateAsset(aclass: String, altname: String, decimals: Int, display_decimals: Int): Update0 = {
+    sql"""UPDATE asset
+          SET aclass = $aclass,
+              altname = $altname,
+              decimals = $decimals,
+              display_decimals = $display_decimals
+          WHERE altname = altname""".update
+  }
+
+  def updateAsset2(aclass: String, altname: String, decimals: Int, display_decimals: Int): Process[ConnectionIO, Asset] = {
+    sql"""UPDATE asset
+          SET aclass = $aclass,
+              altname = $altname,
+              decimals = $decimals,
+              display_decimals = $display_decimals
+          WHERE altname = altname""".update.withGeneratedKeys[Asset]("asset_id")
+  }
+
+  def insertAssets(assets: List[Asset]): ConnectionIO[Int] = {
+    val sql = "INSERT INTO asset (aclass, altname, decimals, display_decimals) VALUES (?, ?, ?, ?)"
+    Update[Asset](sql).updateMany(assets)
+  }
+
+  def insertAssets2(assets: List[Asset]): Process[ConnectionIO, Asset] = {
+    val sql = "INSERT INTO asset (aclass, altname, decimals, display_decimals) VALUES (?, ?, ?, ?)"
+    Update[Asset](sql).updateManyWithGeneratedKeys[Asset]("asset_id")(assets)
+  }
+
+  def findAssetByClass(aclass: String): Query0[(String, String, Int, Int)] = {
+    sql"""SELECT * FROM asset WHERE aclass = $aclass""".query[(String, String, Int, Int)]
+  }
 
 }

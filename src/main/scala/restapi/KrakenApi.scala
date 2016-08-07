@@ -10,8 +10,6 @@ import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.scala.DefaultScalaModule
 
-import scala.collection.immutable.AbstractMap
-
 object KrakenApi {
 
   private val PROTOCOL = "https://"
@@ -20,11 +18,9 @@ object KrakenApi {
   private val PUBLIC_ENDPOINT = "public/"
   private val API_URL = PROTOCOL + DOMAIN + VERSION + PUBLIC_ENDPOINT
 
-  // Use the jackson converter with the scala module registered,
-  // so that jackson knows how to handle the standard scala types.
   private val mapper = new ObjectMapper()
-  mapper.registerModule(DefaultScalaModule)
-  mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    .registerModule(DefaultScalaModule)
+    .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
   private val retrofit = new Retrofit.Builder()
     .baseUrl(API_URL)
@@ -47,8 +43,8 @@ object KrakenApi {
     * @note This is to aid in approximating the skew time between the server and client.
     */
   def getServerTime: Either[List[String], TimeResponse] = {
-    val response = api.time().execute().body()
-    createResponse(response)
+    val body = api.time().execute().body()
+    createResponse(body)
   }
 
   /**
@@ -61,10 +57,10 @@ object KrakenApi {
     */
   def getAssetInfo(info: String = "info",
                    aClass: String = "currency",
-                   asset: String = "all"): Either[List[String], Array[AssetsResponse]] = {
-    val response = api.assets(info, aClass, asset).execute().body()
-    createResponse(response)
-    null
+                   asset: String = null): Either[List[String], Array[AssetsResponse]] = {
+    val body = api.assets(info, aClass, asset).execute().body()
+    val assetsResponse = body.result.map(x => AssetsResponse(x._1, x._2)).toArray
+    createResponse(Response[Array[AssetsResponse]](body.error, assetsResponse))
   }
 
   /**
@@ -74,9 +70,9 @@ object KrakenApi {
     * @return Array of pair names and their ticker info.
     */
   def getTickerInfo(pair: Array[String]): Either[List[String], Array[TickerResponse]] = {
-    val response = api.ticker(pair.mkString(",")).execute().body()
-    createResponse(response)
-    null
+    val body = api.ticker(pair.mkString(",")).execute().body()
+    val tickerReponse = body.result.map(x => TickerResponse(x._1, x._2)).toArray
+    createResponse(Response[Array[TickerResponse]](body.error, tickerReponse))
   }
 
   /**
@@ -90,16 +86,11 @@ object KrakenApi {
   def getOHLCdata(pair: String,
                   since: String = null,
                   interval: Interval = Interval.`1`): Either[List[String], OhlcResponse] = {
-
     val body = api.ohlc(pair, interval.toString, since).execute().body()
     val name = body.result.head._1
     val last = body.result.last._2.toString.toInt
-    val data = body.result.head._2.asInstanceOf[List[List[Object]]]
-
-    val ohlcResponse = OhlcResponse(name, data.map(x => MarketData(x.head.toString.toInt, x(1).toString.toDouble,
-                                                   x(2).toString.toDouble, x(3).toString.toDouble,
-                                                   x(4).toString.toDouble, x(5).toString.toDouble,
-                                                   x(6).toString.toDouble, x(7).toString.toInt)).toArray, last)
+    val data = body.result.head._2.asInstanceOf[List[List[Object]]].toArray
+    val ohlcResponse = OhlcResponse(name, data.map(x => MarketData(x)), last)
     createResponse(Response[OhlcResponse](body.error, ohlcResponse))
   }
 
@@ -118,8 +109,8 @@ object KrakenApi {
     */
   def getTradableAssets(pair: Array[String],
                         info: AssetInfo = AssetInfo.All): Either[List[String], Array[AssetPairResponse]] = {
-    val response = api.assetPairs(info.toString, pair.mkString(",")).execute().body()
-    createResponse(response)
+    val body = api.assetPairs(info.toString, pair.mkString(",")).execute().body()
+    createResponse(body)
     null
   }
 
@@ -131,8 +122,8 @@ object KrakenApi {
     * @return Array of pair name and market depth.
     */
   def getOrderBook(pair: String, count: Int): Either[List[String], OrderBookResponse] = {
-    val response = api.depth(pair, count).execute().body()
-    createResponse(response)
+    val body = api.depth(pair, count).execute().body()
+    createResponse(body)
     null
   }
 
@@ -143,8 +134,8 @@ object KrakenApi {
     * @return Array of pair name and recent trade data.
     */
   def getRecentTrades(pair: String, since: String): Either[List[String], Array[TradesResponse]] = {
-    val response = api.trades(pair, since).execute().body()
-    createResponse(response)
+    val body = api.trades(pair, since).execute().body()
+    createResponse(body)
     null
   }
 
@@ -158,8 +149,8 @@ object KrakenApi {
     *       as the previous set should overwrite all of the previous set's entries at that time
     */
   def getRecentSpreadData(pair: String, since: String): Either[List[String], SpreadResponse] = {
-    val response = api.spread(pair, since).execute().body()
-    createResponse(response)
+    val body = api.spread(pair, since).execute().body()
+    createResponse(body)
     null
   }
 }

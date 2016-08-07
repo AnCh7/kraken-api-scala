@@ -21,6 +21,7 @@ import models.Ticker
 }
  */
 /**
-  * @param result pair name.
+  * @param name   pair name.
+  * @param result pair info.
   */
-case class TickerResponse(result: Ticker)
+case class TickerResponse(name: String, result: Ticker)

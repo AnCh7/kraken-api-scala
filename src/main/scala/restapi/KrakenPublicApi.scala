@@ -1,13 +1,10 @@
 package restapi
 
-import java.util
-
-import models.MarketData
+import models._
 import responses._
 import retrofit2.Call
 
 import scala.collection.immutable.HashMap
-import scala.collection.immutable.HashMap.HashMap1
 
 trait KrakenPublicApi {
 
@@ -22,10 +19,10 @@ trait KrakenPublicApi {
   @get("Assets")
   def assets(@query("info") info: String,
              @query("aclass") aClass: String,
-             @query("asset") asset: String): Call[Response[AssetsResponse]]
+             @query("asset") asset: String): Call[Response[HashMap[String, Asset]]]
 
   @get("Ticker")
-  def ticker(@query("pair") pair: String): Call[Response[TickerResponse]]
+  def ticker(@query("pair") pair: String): Call[Response[HashMap[String, Ticker]]]
 
   @get("OHLC")
   def ohlc(@query("pair") pair: String,

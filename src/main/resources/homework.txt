@@ -31,3 +31,4 @@ JSON libraries: http://manuel.bernhardt.io/2015/11/06/a-quick-tour-of-json-libra
   // `market/limit`: String,
 
   // MarketData types
+  // Ticker nested arrays as types

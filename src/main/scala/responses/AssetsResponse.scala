@@ -16,6 +16,7 @@ import models.Asset
 }
  */
 /**
-  * @param name asset name.
+  * @param name  asset name.
+  * @param asset array of asset info.
   */
-case class AssetsResponse(name: Asset)
+case class AssetsResponse(name: String, asset: Asset)
