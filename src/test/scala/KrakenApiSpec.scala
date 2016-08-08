@@ -1,7 +1,7 @@
 import restapi.KrakenApi
 import org.scalatest._
 
-class KrakenApiSpecification extends FunSuite {
+class KrakenApiSpec extends FunSuite {
 
   test("getServerTime method returns valid response") {
     val result = KrakenApi.getServerTime

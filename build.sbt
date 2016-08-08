@@ -4,13 +4,16 @@ version := "1.0"
 
 scalaVersion := "2.11.8"
 
-libraryDependencies += "org.json4s" % "json4s-native_2.11" % "3.4.0"
+libraryDependencies += "org.apache.commons" % "commons-dbcp2" % "2.1.1"
 
-libraryDependencies += "org.tpolecat" % "doobie-core_2.11" % "0.3.0"
-libraryDependencies += "org.tpolecat" % "doobie-contrib-specs2_2.11" % "0.3.0"
-libraryDependencies += "org.tpolecat" % "doobie-contrib-postgresql_2.11" % "0.3.0"
+libraryDependencies += "org.postgresql" % "postgresql" % "9.4.1209.jre7"
+libraryDependencies += "com.h2database" % "h2" % "1.4.192"
 
-libraryDependencies += "org.scalaz" %% "scalaz-core" % "7.2.4"
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.7"
+
+libraryDependencies += "org.scalikejdbc" %% "scalikejdbc" % "2.4.2"
+libraryDependencies += "org.scalikejdbc" %% "scalikejdbc-test" % "2.4.2" % "test"
+libraryDependencies += "org.scalikejdbc" % "scalikejdbc-config_2.11" % "2.4.2"
 
 libraryDependencies += "com.squareup.retrofit2" % "retrofit" % "2.1.0"
 libraryDependencies += "com.squareup.retrofit2" % "converter-gson" % "2.1.0"

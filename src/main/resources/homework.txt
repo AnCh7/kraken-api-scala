@@ -32,3 +32,4 @@ JSON libraries: http://manuel.bernhardt.io/2015/11/06/a-quick-tour-of-json-libra
 
   // MarketData types
   // Ticker nested arrays as types
+  // DAO what is if empty
