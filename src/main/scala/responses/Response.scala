@@ -11,4 +11,4 @@ package responses
   * @param result json response.
   * @tparam A type of response.
   */
-case class Response[A](error: List[String], result: A)
+case class Response[A](error: Seq[String], result: A)

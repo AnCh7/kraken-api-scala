@@ -13,5 +13,5 @@ package models
   * @param asks ask side array of array entries (price, volume, timestamp)
   * @param bids bid side array of array entries (price, volume, timestamp)
   */
-case class OrderBook(asks: List[PriceLevel], bids: List[PriceLevel])
+case class OrderBook(asks: Seq[PriceLevel], bids: Seq[PriceLevel])
 

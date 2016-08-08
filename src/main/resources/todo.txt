@@ -1,0 +1,6 @@
+Check all inputs with defaults
+buy/sell String
+market/limit String
+MarketData types
+Ticker nested arrays as types
+Fee

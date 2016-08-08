@@ -30,7 +30,7 @@ trait KrakenPublicApi {
            @query("since") since: String): Call[Response[HashMap[String, Object]]]
 
   @get("AssetPairs")
-  def assetPairs(@query("info") info: String, @query("pair") pair: String): Call[Response[AssetPairResponse]]
+  def assetPairs(@query("info") info: String, @query("pair") pair: String): Call[Response[HashMap[String, AssetPair]]]
 
   @get("Depth")
   def depth(@query("pair") pair: String, @query("count") count: Int): Call[Response[OrderBookResponse]]

@@ -19,4 +19,4 @@ import models.MarketData
   * @note the last entry in the OHLC array is for the current, not-yet-committed frame and will always be present,
   *       regardless of the value of "since".
   */
-case class OhlcResponse(name: String, data: Array[MarketData], last: Int)
+case class OhlcResponse(name: String, data: Seq[MarketData], last: Int)

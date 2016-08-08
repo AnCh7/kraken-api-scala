@@ -1,9 +1,9 @@
 import dataaccess.AssetDao
 import models.Asset
 import org.scalatest._
-import scalikejdbc._
+import scalikejdbc.config
 
-class AssetDaoSpecs extends FlatSpec with Matchers with OptionValues with Inside with Inspectors {
+class AssetDaoSpec extends FlatSpec with Matchers with OptionValues with Inside with Inspectors {
 
   config.DBs.setupAll()
 
@@ -13,53 +13,81 @@ class AssetDaoSpecs extends FlatSpec with Matchers with OptionValues with Inside
   var asset1 = Asset("currency", "ETH", 10, 5)
   var asset2 = Asset("currency", "XBT", 10, 5)
   var updateAsset = Asset("currency", "ETH2", 10, 5)
-  var assets = Array(asset1, asset2)
+  var invalidAsset = Asset(null, null, 0, 0)
+  var assets = Seq(asset1, asset2)
 
   "Database" should "be empty in the beginning" in {
-    assert(AssetDao.getAll.isEmpty)
+    AssetDao.getAll match {
+      case Right(r) => assert(r.isEmpty)
+      case Left(l) => fail()
+    }
   }
 
   it should "be 1 asset in database with id 1 after inserting an asset" in {
-    val id = AssetDao.insert(asset1)
-    assert(id === 1)
+    AssetDao.insert(asset1) match {
+      case Right(id) => assert(id === 1)
+      case Left(l) => fail()
+    }
   }
 
   it should "be 1 asset in database with id 2 after inserting an asset" in {
-    val id = AssetDao.insert(asset2)
-    assert(id === 2)
+    AssetDao.insert(asset2) match {
+      case Right(id) => assert(id === 2)
+      case Left(l) => fail()
+    }
   }
 
   it should "find 2 assets by 'aClass' field equals 'currency'" in {
-    val assets = AssetDao.findByAClass("currency")
-    assert(assets.length === 2)
+    AssetDao.findByAClass("currency") match {
+      case Right(r) => assert(r.length === 2)
+      case Left(l) => fail()
+    }
   }
 
   it should "be 0 assets in database after deleting asset 1 and 2" in {
-    val d1 = AssetDao.delete(1)
-    val d2 = AssetDao.delete(2)
-    assert(d1 === 1)
-    assert(d2 === 1)
-    assert(AssetDao.getAll.isEmpty)
+    AssetDao.delete(1) match {
+      case Right(id) => assert(id === 1)
+      case Left(l) => fail()
+    }
+    AssetDao.delete(2) match {
+      case Right(id) => assert(id === 1)
+      case Left(l) => fail()
+    }
+    AssetDao.getAll match {
+      case Right(r) => assert(r.isEmpty)
+      case Left(l) => fail()
+    }
   }
 
   it should "be 2 assets in database after batch insert" in {
-    val ids = AssetDao.insert(assets)
-    assert(ids.head === 3)
-    assert(ids.last === 4)
-    assert(AssetDao.getAll.length === 2)
+    AssetDao.insert(assets) match {
+      case Right(ids) => assert(ids.length === 2)
+      case Left(l) => fail()
+    }
+
+    AssetDao.getAll match {
+      case Right(r) => assert(r.length === 2)
+      case Left(l) => fail()
+    }
   }
 
   it should "be changed asset's 'altname' field in database after update call" in {
-    val id = AssetDao.update(3, updateAsset)
-    val asset = AssetDao.findByAltName(updateAsset.altname)
-    assert(id === 1)
-    assert(asset.length === 1)
-    assert(asset.head.altname === "ETH2")
+    AssetDao.update(3, updateAsset) match {
+      case Right(id) => assert(id === 1)
+      case Left(l) => fail()
+    }
+    AssetDao.findByAltName(updateAsset.altname) match {
+      case Right(r) =>
+        assert(r.length === 1)
+        assert(r.head.altname === "ETH2")
+      case Left(l) => fail()
+    }
   }
 
+  it should "throw error if inserting invalid asset" in {
+    AssetDao.insert(invalidAsset) match {
+      case Right(r) => fail()
+      case Left(l) => assert(l === "ERROR: null value in column \"aclass\" violates not-null constraint\n  Detail: Failing row contains (5, null, null, 0, 0).")
+    }
+  }
 }
-
-
-
-
-

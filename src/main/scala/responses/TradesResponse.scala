@@ -17,6 +17,6 @@ import models.Trade
   *                  Array of array entries(price, volume, time, buy/sell, market/limit, miscellaneous).
   * @param last      id to be used as since when polling for new trade data
   */
-case class TradesResponse(pair_name: List[Trade], last: String)
+case class TradesResponse(pair_name: Seq[Trade], last: String)
 
 

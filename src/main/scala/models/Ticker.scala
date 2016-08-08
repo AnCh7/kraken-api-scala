@@ -28,5 +28,5 @@ package models
   * @param o today's opening price.
   * @note today's prices start at 00:00:00 UTC.
   */
-case class Ticker(a: Array[Double], b: Array[Double], c: Array[Double], v: Array[Double],
-                  p: Array[Double], t: Array[Int], l: Array[Double], h: Array[Double], o: Double)
+case class Ticker(a: Seq[Double], b: Seq[Double], c: Seq[Double], v: Seq[Double],
+                  p: Seq[Double], t: Seq[Int], l: Seq[Double], h: Seq[Double], o: Double)

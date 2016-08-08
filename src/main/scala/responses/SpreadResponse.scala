@@ -13,4 +13,4 @@ package responses
   * @param pair_name pair name. Array of array entries(time, bid, ask).
   * @param last      id to be used as since when polling for new spread data.
   */
-case class SpreadResponse(pair_name: List[Spread], last: Double)
+case class SpreadResponse(pair_name: Seq[Spread], last: Double)
