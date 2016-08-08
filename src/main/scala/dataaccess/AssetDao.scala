@@ -110,7 +110,7 @@ object AssetDao extends AssetRepository {
 
   private def mapAsset: (WrappedResultSet) => Asset = {
     (rs: WrappedResultSet) => {
-      Asset(rs.string("aclass"), rs.string("altname"), rs.int("decimals"), rs.int("display_decimals")
+      Asset(rs.string("aclass"), rs.string("altname"), rs.int("decimals"), rs.int("display_decimals"))
     }
   }
 }
