@@ -30,6 +30,6 @@ import models.AssetPair
 /**
   * @param name pair name.
   */
-case class AssetPairResponse(name: String, data: AssetPair)
+case class AssetPairResponse(name: String, result: AssetPair)
 
 

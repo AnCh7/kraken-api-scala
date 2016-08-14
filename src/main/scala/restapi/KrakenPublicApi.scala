@@ -1,10 +1,7 @@
 package restapi
 
-import models._
-import responses._
+import okhttp3.ResponseBody
 import retrofit2.Call
-
-import scala.collection.immutable.HashMap
 
 trait KrakenPublicApi {
 
@@ -14,31 +11,27 @@ trait KrakenPublicApi {
   type query = retrofit2.http.Query
 
   @get("Time")
-  def time(): Call[Response[TimeResponse]]
+  def time(): Call[ResponseBody]
 
   @get("Assets")
-  def assets(@query("info") info: String,
-             @query("aclass") aClass: String,
-             @query("asset") asset: String): Call[Response[HashMap[String, Asset]]]
+  def assets(@query("info") info: String, @query("aclass") aClass: String, @query("asset") asset: String): Call[ResponseBody]
 
   @get("Ticker")
-  def ticker(@query("pair") pair: String): Call[Response[HashMap[String, Ticker]]]
+  def ticker(@query("pair") pair: String): Call[ResponseBody]
 
   @get("OHLC")
-  def ohlc(@query("pair") pair: String,
-           @query("interval") interval: String,
-           @query("since") since: String): Call[Response[HashMap[String, Object]]]
+  def ohlc(@query("pair") pair: String, @query("interval") interval: String, @query("since") since: String): Call[ResponseBody]
 
   @get("AssetPairs")
-  def assetPairs(@query("info") info: String, @query("pair") pair: String): Call[Response[HashMap[String, AssetPair]]]
+  def assetPairs(@query("info") info: String, @query("pair") pair: String): Call[ResponseBody]
 
   @get("Depth")
-  def depth(@query("pair") pair: String, @query("count") count: Int): Call[Response[OrderBookResponse]]
+  def depth(@query("pair") pair: String, @query("count") count: Int): Call[ResponseBody]
 
   @get("Trades")
-  def trades(@query("pair") pair: String, @query("since") since: String): Call[Response[TradesResponse]]
+  def trades(@query("pair") pair: String, @query("since") since: String): Call[ResponseBody]
 
   @get("Spread")
-  def spread(@query("pair") pair: String, @query("since") since: String): Call[Response[SpreadResponse]]
+  def spread(@query("pair") pair: String, @query("since") since: String): Call[ResponseBody]
 }
 

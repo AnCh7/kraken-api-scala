@@ -9,10 +9,9 @@ class KrakenApiSpec extends FunSuite {
     val result = api.getServerTime()
     result match {
       case Left(errors) => fail()
-      case Right(response) => {
+      case Right(response) =>
         assert(!response.rfc1123.isEmpty)
         assert(!response.unixtime.isNaN)
-      }
     }
   }
 
@@ -20,14 +19,13 @@ class KrakenApiSpec extends FunSuite {
     val result = api.getAssetInfo()
     result match {
       case Left(errors) => fail()
-      case Right(response) => {
+      case Right(response) =>
         assert(response.nonEmpty)
         assert(!response.head.name.isEmpty)
-        assert(!response.head.asset.aclass.isEmpty)
-        assert(!response.head.asset.altname.isEmpty)
-        assert(!response.head.asset.decimals.isNaN)
-        assert(!response.head.asset.display_decimals.isNaN)
-      }
+        assert(!response.head.result.aclass.isEmpty)
+        assert(!response.head.result.altname.isEmpty)
+        assert(!response.head.result.decimals.isNaN)
+        assert(!response.head.result.display_decimals.isNaN)
     }
   }
 
@@ -57,7 +55,7 @@ class KrakenApiSpec extends FunSuite {
     val result = api.getTickerInfo(Seq("DAOETH", "DAOEUR"))
     result match {
       case Left(errors) => fail()
-      case Right(response) => {
+      case Right(response) =>
         assert(response.nonEmpty)
         assert(!response.head.name.isEmpty)
         assert(response.head.result.a.nonEmpty)
@@ -65,11 +63,10 @@ class KrakenApiSpec extends FunSuite {
         assert(response.head.result.c.nonEmpty)
         assert(response.head.result.h.nonEmpty)
         assert(response.head.result.l.nonEmpty)
-        assert(!response.head.result.o.isNaN)
+        assert(response.head.result.o.nonEmpty)
         assert(response.head.result.p.nonEmpty)
         assert(response.head.result.t.nonEmpty)
-        assert(!response.head.result.v.isEmpty)
-      }
+        assert(response.head.result.v.nonEmpty)
     }
   }
 
@@ -77,19 +74,18 @@ class KrakenApiSpec extends FunSuite {
     val result = api.getOHLCdata("DAOETH")
     result match {
       case Left(errors) => fail()
-      case Right(response) => {
+      case Right(response) =>
         assert(!response.name.isEmpty)
         assert(!response.last.isNaN)
-        assert(response.data.nonEmpty)
-        assert(!response.data.head.close.isNaN)
-        assert(!response.data.head.count.isNaN)
-        assert(!response.data.head.high.isNaN)
-        assert(!response.data.head.low.isNaN)
-        assert(!response.data.head.open.isNaN)
-        assert(!response.data.head.time.isNaN)
-        assert(!response.data.head.volume.isNaN)
-        assert(!response.data.head.vwap.isNaN)
-      }
+        assert(response.result.nonEmpty)
+        assert(!response.result.head.close.isNaN)
+        assert(!response.result.head.count.isNaN)
+        assert(!response.result.head.high.isNaN)
+        assert(!response.result.head.low.isNaN)
+        assert(!response.result.head.open.isNaN)
+        assert(!response.result.head.time.isNaN)
+        assert(!response.result.head.volume.isNaN)
+        assert(!response.result.head.vwap.isNaN)
     }
   }
 
@@ -97,29 +93,72 @@ class KrakenApiSpec extends FunSuite {
     val result = api.getTradableAssets(Seq("DAOETH"))
     result match {
       case Left(errors) => fail()
-      case Right(response) => {
+      case Right(response) =>
         assert(response.nonEmpty)
         assert(response.head.name.nonEmpty)
-        assert(response.head.data.altname.nonEmpty)
-        assert(response.head.data.aclass_base.nonEmpty)
-        assert(response.head.data.base.nonEmpty)
-        assert(response.head.data.aclass_quote.nonEmpty)
-        assert(response.head.data.quote.nonEmpty)
-        assert(response.head.data.lot.nonEmpty)
-        assert(!response.head.data.pair_decimals.isNaN)
-        assert(!response.head.data.lot_decimals.isNaN)
-        assert(!response.head.data.lot_multiplier.isNaN)
-        //assert(response.head.data.leverage_buy.nonEmpty)
-        //assert(response.head.data.leverage_sell.nonEmpty)
-        assert(response.head.data.fees.nonEmpty)
-        assert(response.head.data.fees_maker.nonEmpty)
-        assert(response.head.data.fee_volume_currency.nonEmpty)
-        assert(!response.head.data.margin_call.isNaN)
-        assert(!response.head.data.margin_stop.isNaN)
-      }
+        assert(response.head.result.altname.nonEmpty)
+        assert(response.head.result.aclass_base.nonEmpty)
+        assert(response.head.result.base.nonEmpty)
+        assert(response.head.result.aclass_quote.nonEmpty)
+        assert(response.head.result.quote.nonEmpty)
+        assert(response.head.result.lot.nonEmpty)
+        assert(!response.head.result.pair_decimals.isNaN)
+        assert(!response.head.result.lot_decimals.isNaN)
+        assert(!response.head.result.lot_multiplier.isNaN)
+        //assert(response.head.result.leverage_buy.nonEmpty)
+        //assert(response.head.result.leverage_sell.nonEmpty)
+        assert(response.head.result.fees.nonEmpty)
+        assert(response.head.result.fees_maker.nonEmpty)
+        assert(response.head.result.fee_volume_currency.nonEmpty)
+        assert(!response.head.result.margin_call.isNaN)
+        assert(!response.head.result.margin_stop.isNaN)
     }
   }
 
+  test("getOrderBook method returns valid response valid parameters") {
+    val result = api.getOrderBook("DAOETH")
+    result match {
+      case Left(errors) => fail()
+      case Right(response) =>
+        assert(response.name.nonEmpty)
+        assert(response.result.asks.nonEmpty)
+        assert(response.result.bids.nonEmpty)
+        assert(!response.result.bids.head.price.isNaN)
+        assert(!response.result.bids.head.timestamp.isNaN)
+        assert(!response.result.bids.head.volume.isNaN)
+    }
+  }
+
+  test("getRecentTrades method returns valid response valid parameters") {
+    val result = api.getRecentTrades("DAOETH")
+    result match {
+      case Left(errors) => fail()
+      case Right(response) =>
+        assert(response.last.nonEmpty)
+        assert(response.name.nonEmpty)
+        assert(response.trades.nonEmpty)
+        assert(response.trades.head.TradeType.toString.nonEmpty)
+        assert(response.trades.head.OrderType.toString.nonEmpty)
+        //assert(response.trades.head.miscellaneous.nonEmpty)
+        assert(!response.trades.head.price.isNaN)
+        assert(!response.trades.head.time.isNaN)
+        assert(!response.trades.head.volume.isNaN)
+    }
+  }
+
+  test("getRecentSpreadData method returns valid response valid parameters") {
+    val result = api.getRecentSpreadData("DAOETH")
+    result match {
+      case Left(errors) => fail()
+      case Right(response) =>
+        assert(!response.last.isNaN)
+        assert(response.name.nonEmpty)
+        assert(response.data.nonEmpty)
+        assert(!response.data.head.ask.isNaN)
+        assert(!response.data.head.bid.isNaN)
+        assert(!response.data.head.time.isNaN)
+    }
+  }
 }
 
 

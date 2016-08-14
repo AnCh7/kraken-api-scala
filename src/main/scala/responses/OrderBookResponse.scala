@@ -16,4 +16,4 @@ import models.OrderBook
 /**
   * @param name pair name.
   */
-case class OrderBookResponse(name: OrderBook)
+case class OrderBookResponse(name: String, result: OrderBook)

@@ -12,7 +12,7 @@ object KrakenexApp extends App {
       case Right(data) => {
         AssetDao.dropTable()
         AssetDao.createTable()
-        val asset = data.head.asset
+        val asset = data.head.result
         println(asset)
         println(AssetDao.insert(asset))
         println(AssetDao.findByAClass("currency"))

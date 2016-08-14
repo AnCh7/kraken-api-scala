@@ -13,10 +13,10 @@ import models.Trade
 }
  */
 /**
-  * @param pair_name pair name.
-  *                  Array of array entries(price, volume, time, buy/sell, market/limit, miscellaneous).
-  * @param last      id to be used as since when polling for new trade data
+  * @param name   pair name.
+  * @param trades Array of array entries(price, volume, time, buy/sell, market/limit, miscellaneous).
+  * @param last   id to be used as since when polling for new trade data
   */
-case class TradesResponse(pair_name: Seq[Trade], last: String)
+case class TradesResponse(name: String, trades: Seq[Trade], last: String)
 
 

@@ -4,15 +4,9 @@ package models
 case class MarketData(time: Int, open: Double, high: Double, low: Double, close: Double, vwap: Double, volume: Double, count: Int)
 
 object MarketData {
-  def apply(data: Seq[Object]): MarketData = {
-    MarketData(data.head.toString.toInt,
-      data(1).toString.toDouble,
-      data(2).toString.toDouble,
-      data(3).toString.toDouble,
-      data(4).toString.toDouble,
-      data(5).toString.toDouble,
-      data(6).toString.toDouble,
-      data(7).toString.toInt)
+  def apply(data: Seq[String]): MarketData = {
+    MarketData(data.head.toString.toInt, data(1).toDouble, data(2).toDouble,
+      data(3).toDouble, data(4).toDouble, data(5).toDouble, data(6).toDouble, data(7).toInt)
   }
 }
 

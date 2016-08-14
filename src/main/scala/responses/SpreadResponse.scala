@@ -1,5 +1,7 @@
 package responses
 
+import models.Spread
+
 /*
 {
   "error": [],
@@ -10,7 +12,8 @@ package responses
 }
  */
 /**
-  * @param pair_name pair name. Array of array entries(time, bid, ask).
-  * @param last      id to be used as since when polling for new spread data.
+  * @param name pair name.
+  * @param data pair name. Array of array entries(time, bid, ask).
+  * @param last id to be used as since when polling for new spread data.
   */
-case class SpreadResponse(pair_name: Seq[Spread], last: Double)
+case class SpreadResponse(name: String, data: Seq[Spread], last: Double)

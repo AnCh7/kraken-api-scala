@@ -26,41 +26,41 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="SBT: org.scala-lang:scala-library:2.11.8:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: ch.qos.logback:logback-classic:1.1.7:jar" level="project" />
-    <orderEntry type="library" name="SBT: ch.qos.logback:logback-core:1.1.7:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-annotations:2.7.5:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-core:2.7.5:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-databind:2.7.5:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.fasterxml.jackson.module:jackson-module-paranamer:2.7.5:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.fasterxml.jackson.module:jackson-module-scala_2.11:2.7.5:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.google.code.gson:gson:2.7:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.h2database:h2:1.4.192:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.squareup.okhttp3:okhttp:3.3.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.squareup.okio:okio:1.8.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.squareup.retrofit2:converter-gson:2.1.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.squareup.retrofit2:converter-jackson:2.1.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.squareup.retrofit2:retrofit:2.1.0:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.thoughtworks.paranamer:paranamer:2.8:jar" level="project" />
-    <orderEntry type="library" name="SBT: com.typesafe:config:1.2.1:jar" level="project" />
-    <orderEntry type="library" name="SBT: commons-logging:commons-logging:1.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: joda-time:joda-time:2.9.4:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.apache.commons:commons-dbcp2:2.1.1:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.apache.commons:commons-pool2:2.4.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.joda:joda-convert:1.8.1:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.postgresql:postgresql:9.4.1209.jre7:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scala-lang:scala-reflect:2.11.8:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scala-sbt:test-interface:1.0:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scalacheck:scalacheck_2.11:1.13.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scalactic:scalactic_2.11:2.2.6:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scalatest:scalatest_2.11:2.2.6:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scalikejdbc:scalikejdbc-config_2.11:2.4.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scalikejdbc:scalikejdbc-core_2.11:2.4.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scalikejdbc:scalikejdbc-interpolation-macro_2.11:2.4.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scalikejdbc:scalikejdbc-interpolation_2.11:2.4.2:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="SBT: org.scalikejdbc:scalikejdbc-test_2.11:2.4.2:jar" level="project" />
-    <orderEntry type="library" name="SBT: org.scalikejdbc:scalikejdbc_2.11:2.4.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-databind:2.6.7:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-core:2.6.7:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.fasterxml.jackson.core:jackson-annotations:2.6.0:jar" level="project" />
     <orderEntry type="library" name="SBT: org.slf4j:slf4j-api:1.7.21:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scalikejdbc:scalikejdbc_2.11:2.4.2:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalikejdbc:scalikejdbc-test_2.11:2.4.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scalikejdbc:scalikejdbc-interpolation_2.11:2.4.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scalikejdbc:scalikejdbc-interpolation-macro_2.11:2.4.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scalikejdbc:scalikejdbc-core_2.11:2.4.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scalikejdbc:scalikejdbc-config_2.11:2.4.2:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalatest:scalatest_2.11:2.2.6:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scalactic:scalactic_2.11:2.2.6:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scalacheck:scalacheck_2.11:1.13.2:jar" level="project" />
+    <orderEntry type="library" scope="TEST" name="SBT: org.scala-sbt:test-interface:1.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-parser-combinators_2.11:1.0.4:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang:scala-reflect:2.11.8:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.postgresql:postgresql:9.4.1209.jre7:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.joda:joda-convert:1.8.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.apache.commons:commons-pool2:2.4.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.apache.commons:commons-dbcp2:2.1.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: joda-time:joda-time:2.9.4:jar" level="project" />
+    <orderEntry type="library" name="SBT: commons-logging:commons-logging:1.2:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.typesafe:config:1.2.1:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.thoughtworks.paranamer:paranamer:2.8:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.squareup.retrofit2:retrofit:2.1.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.squareup.okio:okio:1.8.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.squareup.okhttp3:okhttp:3.3.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: com.h2database:h2:1.4.192:jar" level="project" />
+    <orderEntry type="library" name="SBT: ch.qos.logback:logback-core:1.1.7:jar" level="project" />
+    <orderEntry type="library" name="SBT: ch.qos.logback:logback-classic:1.1.7:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.json4s:json4s-ast_2.11:3.4.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.json4s:json4s-core_2.11:3.4.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.json4s:json4s-jackson_2.11:3.4.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.json4s:json4s-native_2.11:3.4.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.json4s:json4s-scalap_2.11:3.4.0:jar" level="project" />
+    <orderEntry type="library" name="SBT: org.scala-lang.modules:scala-xml_2.11:1.0.5:jar" level="project" />
   </component>
 </module>

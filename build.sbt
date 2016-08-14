@@ -16,10 +16,14 @@ libraryDependencies += "org.scalikejdbc" %% "scalikejdbc-test" % "2.4.2" % "test
 libraryDependencies += "org.scalikejdbc" % "scalikejdbc-config_2.11" % "2.4.2"
 
 libraryDependencies += "com.squareup.retrofit2" % "retrofit" % "2.1.0"
-libraryDependencies += "com.squareup.retrofit2" % "converter-gson" % "2.1.0"
-libraryDependencies += "com.squareup.retrofit2" % "converter-jackson" % "2.1.0"
-libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.11" % "2.7.5"
+//libraryDependencies += "com.squareup.retrofit2" % "converter-gson" % "2.1.0"
+//libraryDependencies += "com.squareup.retrofit2" % "converter-jackson" % "2.1.0"
+//libraryDependencies += "com.fasterxml.jackson.module" % "jackson-module-scala_2.11" % "2.7.5"
 
 libraryDependencies += "org.scalactic" %% "scalactic" % "2.2.6"
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.2.6" % "test"
 libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.13.2" % "test"
+
+libraryDependencies += "org.json4s" % "json4s-jackson_2.11" % "3.4.0"
+libraryDependencies += "org.json4s" % "json4s-native_2.11" % "3.4.0"
+

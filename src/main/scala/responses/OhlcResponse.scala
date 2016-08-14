@@ -14,9 +14,9 @@ import models.MarketData
 /**
   *
   * @param name pair name.
-  * @param data Array of array entries(time, open, high, low, close, vwap, volume, count).
+  * @param result Array of array entries(time, open, high, low, close, vwap, volume, count).
   * @param last id to be used as since when polling for new, committed OHLC data.
   * @note the last entry in the OHLC array is for the current, not-yet-committed frame and will always be present,
   *       regardless of the value of "since".
   */
-case class OhlcResponse(name: String, data: Seq[MarketData], last: Int)
+case class OhlcResponse(name: String, result: Seq[MarketData], last: Int)
